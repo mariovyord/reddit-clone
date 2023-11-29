@@ -2,7 +2,7 @@ const paths = {
   home() {
     return "/";
   },
-  topic(topicSlug: string) {
+  topicShow(topicSlug: string) {
     return `/topics/${topicSlug}`;
   },
   postCreate(topicSlug: string) {
