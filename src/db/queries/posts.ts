@@ -29,3 +29,16 @@ export function fetchTopPosts(): Promise<EnrichedPost[]> {
     take: 5,
   });
 }
+
+export function fetchPostsBySearchTerm(term: string): Promise<EnrichedPost[]> {
+  return db.post.findMany({
+    where: {
+      OR: [{ title: { contains: term } }, { content: { contains: term } }],
+    },
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true } },
+      _count: { select: { comments: true } },
+    },
+  });
+}
